@@ -1,0 +1,16 @@
+TODO
+
+1. Add player functionality
+- Press button to jump
+- Press again to swing
+
+2. Add ball to game
+- Make it drop in front of the player
+
+3. Add second player functionality
+- same as first, but with a different swing
+
+4. Make ball serve into player's court
+- randomize it a little maybe?
+
+5. Enhance player's jump to jump towards ball
