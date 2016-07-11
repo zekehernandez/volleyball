@@ -20,6 +20,7 @@ public class PlayerScript : MonoBehaviour {
 	public float InitialJumpStrength = 100;
 	public float JumpStrength = 100;
 	public Transform GroundCheck;
+	public Transform Ball;
 	
 	// Private
 	private Character mCharacter;
@@ -37,6 +38,8 @@ public class PlayerScript : MonoBehaviour {
 		
 		rb2d = GetComponent<Rigidbody2D>();
 		armJoint = transform.Find("Arm").transform.GetComponent<HingeJoint2D>();
+		
+		Physics2D.IgnoreCollision(Ball.GetComponent<Collider2D>(), GetComponent<Collider2D>());
 	}
 	
 	void SetArmSwing () {
