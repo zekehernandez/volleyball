@@ -1,8 +1,8 @@
 TODO
 
-1. Add player functionality
-- Press button to jump
-- Press again to swing
+*** 1. Add player functionality
+* Press button to jump 
+* Press again to swing
 
 2. Add ball to game
 - Make it drop in front of the player
