@@ -17,16 +17,27 @@ public class PlayerScript : MonoBehaviour {
 	public string ButtonAxis = "Button_P1_A";
 	public LayerMask GroundLayer;
 	public int TeamNum = 1;
+	public int SwingDirection = 1;
+	public int BumpDirection = -1;
+	public int SwingAngle = 220;
+	
 	public float InitialJumpStrength = 100;
 	public float JumpStrength = 100;
+	public float HorizontalModifier = 1;
+	public float HorizontalCap = 2000;
+	public float HorizontalPostJump = 0.5f;
+	public float SweetSpot = 1;
+	
 	public Transform GroundCheck;
 	public Transform Ball;
+	public Transform StartPosition;
 	
 	// Private
 	private Character mCharacter;
 	private bool mIsButtonPressed;
 	private bool mIsJumping;
 	private bool mIsSwinging;
+	private bool mIsBumping;
 	private Rigidbody2D rb2d;
 	private HingeJoint2D armJoint;
 
@@ -46,12 +57,26 @@ public class PlayerScript : MonoBehaviour {
 		JointAngleLimits2D limits = armJoint.limits;
 		JointMotor2D motor = armJoint.motor;
 		
-		limits.max = 220;
+		limits.max = SwingAngle * SwingDirection;
 		armJoint.limits = limits;
 		
 		armJoint.useMotor = true;
 		
 		mIsSwinging = true;	
+		mIsBumping = false;
+	}
+	
+	void SetArmBump () {
+		JointAngleLimits2D limits = armJoint.limits;
+		JointMotor2D motor = armJoint.motor;
+		
+		limits.max = 80 * BumpDirection;
+		armJoint.limits = limits;
+		
+		armJoint.useMotor = true;
+		
+		mIsBumping = true;
+		mIsSwinging = false;
 	}
 	
 	void SetArmRest() {
@@ -61,23 +86,54 @@ public class PlayerScript : MonoBehaviour {
 		armJoint.useMotor = false;
 		
 		mIsSwinging = false;
+		mIsBumping = false;
+	}
+	
+	bool BallIsOnMySide() {
+		return Ball.position.x <= 0;
+	}
+	
+	float GetHorizontalStrength(bool initial) {
+		float horizontalSpot;
+		float horizontalStrength;
+		
+		if (BallIsOnMySide()) {
+			horizontalSpot = Ball.position.x;
+		} else {
+			horizontalSpot = StartPosition.position.x;
+		}
+		
+		horizontalStrength = (horizontalSpot - (transform.position.x + SweetSpot)) * HorizontalModifier;
+		if (Mathf.Abs(horizontalStrength) > HorizontalCap) {
+			horizontalStrength = HorizontalCap * Mathf.Sign(horizontalStrength);	
+		}
+		
+		if (!initial) {
+			horizontalStrength = horizontalStrength * HorizontalPostJump;		
+		}
+		
+		return horizontalStrength;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		bool isGrounded = Physics2D.Linecast(transform.position, GroundCheck.position,  1 << LayerMask.NameToLayer("Ground"));
 		bool shouldSwing = false;
+		bool shouldBump = false;
 		
 		if (isGrounded) {
 			if (mIsButtonPressed && !mIsJumping) {
-				rb2d.AddForce(new Vector2(0, InitialJumpStrength));	
+
+				rb2d.AddForce(new Vector2(GetHorizontalStrength(true), InitialJumpStrength));	
 				mIsJumping = true;
+				shouldBump = true;
 			} else if (mIsJumping) 
 				mIsJumping = false;
 		} else {
 			if (mIsButtonPressed) {
 				if (mIsJumping) {
-					rb2d.AddForce(new Vector2(0, JumpStrength));
+					rb2d.AddForce(new Vector2(GetHorizontalStrength(false), JumpStrength));
+					shouldBump = true;
 				} else {
 					shouldSwing = true;	
 				}
@@ -85,10 +141,12 @@ public class PlayerScript : MonoBehaviour {
 				mIsJumping = false;
 		}
 		
-		if (mIsSwinging && !shouldSwing) {
+		if ((mIsSwinging && !shouldSwing) || (mIsBumping && !shouldBump)){
 			SetArmRest();
 		} else if (!mIsSwinging && shouldSwing) {
 			SetArmSwing();
+		} else if (!mIsBumping && shouldBump) {
+			SetArmBump();
 		}
 	}
 

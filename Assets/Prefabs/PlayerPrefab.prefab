@@ -73,7 +73,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 134700}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.8, y: -2.07, z: 5}
+  m_LocalPosition: {x: -3.12, y: -2.05, z: 5}
   m_LocalScale: {x: 0.23, y: 0.23, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -136,7 +136,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 160360}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 8be6341e1ce3f4cec9902bc34f72d20a, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_Offset: {x: 0.0036063401, y: 0.037361227}
@@ -167,14 +167,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 097ed86e0e0efc746bb898f15b5c6110, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ButtonAxis: Button_P1_B
+  ButtonAxis: Button_P1_A
   GroundLayer:
     serializedVersion: 2
     m_Bits: 2048
   TeamNum: 1
+  SwingDirection: 1
+  BumpDirection: -1
   InitialJumpStrength: 20000
   JumpStrength: 200
+  HorizontalModifier: 3000
+  HorizontalCap: 6000
+  HorizontalPostJump: 0.01
+  SweetSpot: 1
   GroundCheck: {fileID: 422980}
+  Ball: {fileID: 0}
+  StartPosition: {fileID: 0}
 --- !u!212 &21261292
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -249,7 +257,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0.08964884, y: 2.7145994}
-  m_ConnectedAnchor: {x: 0.13964902, y: 3.0045996}
+  m_ConnectedAnchor: {x: 0.13964798, y: 3.0045996}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 1500
