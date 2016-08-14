@@ -26,6 +26,7 @@ public class PlayerScript : MonoBehaviour {
 	public float HorizontalModifier = 1;
 	public float HorizontalCap = 2000;
 	public float HorizontalPostJump = 0.5f;
+	public float SwingSpeed = 1500;
 	public float SweetSpot = 1;
 	
 	public Transform GroundCheck;
@@ -47,6 +48,8 @@ public class PlayerScript : MonoBehaviour {
 		mIsJumping = false;
 		mIsSwinging = false;
 		
+		SweetSpot = SweetSpot * SwingDirection;
+		
 		rb2d = GetComponent<Rigidbody2D>();
 		armJoint = transform.Find("Arm").transform.GetComponent<HingeJoint2D>();
 		
@@ -61,6 +64,8 @@ public class PlayerScript : MonoBehaviour {
 		armJoint.limits = limits;
 		
 		armJoint.useMotor = true;
+		motor.motorSpeed = SwingSpeed * SwingDirection;
+		armJoint.motor = motor;
 		
 		mIsSwinging = true;	
 		mIsBumping = false;
@@ -74,6 +79,9 @@ public class PlayerScript : MonoBehaviour {
 		armJoint.limits = limits;
 		
 		armJoint.useMotor = true;
+		motor.motorSpeed = SwingSpeed * BumpDirection;
+		armJoint.motor = motor;
+		
 		
 		mIsBumping = true;
 		mIsSwinging = false;
@@ -81,7 +89,7 @@ public class PlayerScript : MonoBehaviour {
 	
 	void SetArmRest() {
 		JointAngleLimits2D limits = armJoint.limits;
-		limits.max = 90;
+		limits.max = 90 * SwingDirection;
 		armJoint.limits = limits;
 		armJoint.useMotor = false;
 		
@@ -90,7 +98,8 @@ public class PlayerScript : MonoBehaviour {
 	}
 	
 	bool BallIsOnMySide() {
-		return Ball.position.x <= 0;
+		return ((StartPosition.position.x < 0) && (Ball.position.x <= 0))
+			|| ((StartPosition.position.x > 0) && (Ball.position.x >= 0));
 	}
 	
 	float GetHorizontalStrength(bool initial) {

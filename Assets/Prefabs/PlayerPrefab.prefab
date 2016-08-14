@@ -102,7 +102,7 @@ Rigidbody2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 160360}
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 1.2
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -174,12 +174,13 @@ MonoBehaviour:
   TeamNum: 1
   SwingDirection: 1
   BumpDirection: -1
+  SwingAngle: 220
   InitialJumpStrength: 20000
   JumpStrength: 200
   HorizontalModifier: 3000
   HorizontalCap: 6000
   HorizontalPostJump: 0.01
-  SweetSpot: 1
+  SweetSpot: 0.5
   GroundCheck: {fileID: 422980}
   Ball: {fileID: 0}
   StartPosition: {fileID: 0}
