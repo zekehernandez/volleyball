@@ -18,3 +18,11 @@ Same as first, but with a different swing
 Randomize it a little maybe?
 
 ### Enhance player's jump to jump towards ball ###
+
+### Add other team ###
+
+### Add game mechanics ###
+When ball hits the ground, restart
+Add points
+
+### Add serving mechanic ###
