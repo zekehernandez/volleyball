@@ -164,7 +164,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 134700}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 097ed86e0e0efc746bb898f15b5c6110, type: 3}
+  m_Script: {fileID: 11500000, guid: e1af4f41966a170469ab2d4163b199de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ButtonAxis: Button_P1_A
@@ -180,10 +180,13 @@ MonoBehaviour:
   HorizontalModifier: 3000
   HorizontalCap: 6000
   HorizontalPostJump: 0.01
+  SwingSpeed: 1500
   SweetSpot: 0.5
   GroundCheck: {fileID: 422980}
   Ball: {fileID: 0}
   StartPosition: {fileID: 0}
+  ServePosition: {fileID: 0}
+  CurrentGameController: {fileID: 0}
 --- !u!212 &21261292
 SpriteRenderer:
   m_ObjectHideFlags: 1

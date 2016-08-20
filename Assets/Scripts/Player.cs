@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class PlayerScript : MonoBehaviour {
+public class Player : MonoBehaviour {
 	
 	public class Character {
 		
@@ -32,6 +31,9 @@ public class PlayerScript : MonoBehaviour {
 	public Transform GroundCheck;
 	public Transform Ball;
 	public Transform StartPosition;
+	public Transform ServePosition;
+	
+	public GameController CurrentGameController;
 	
 	// Private
 	private Character mCharacter;
@@ -75,7 +77,7 @@ public class PlayerScript : MonoBehaviour {
 		JointAngleLimits2D limits = armJoint.limits;
 		JointMotor2D motor = armJoint.motor;
 		
-		limits.max = 80 * BumpDirection;
+		limits.max = -45 * BumpDirection;
 		armJoint.limits = limits;
 		
 		armJoint.useMotor = true;
@@ -161,6 +163,17 @@ public class PlayerScript : MonoBehaviour {
 
 	void FixedUpdate() {
 		mIsButtonPressed = Input.GetAxis(ButtonAxis) > 0;
+	}
+	
+	public void Reset(bool isServing) {
+		if (isServing) {
+			transform.position = ServePosition.position;
+		} else {
+			transform.position = StartPosition.position;
+		}
+		
+		rb2d.Sleep();
+		rb2d.WakeUp();
 	}
 	
 }
