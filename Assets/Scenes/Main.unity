@@ -895,9 +895,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a66623e5188a98e4f8da5549f454ec51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RedStartPosition: {fileID: 0}
-  BlueStartPosition: {fileID: 0}
-  CurrentGameController: {fileID: 0}
+  RedStartPosition: {fileID: 888191723}
+  BlueStartPosition: {fileID: 406876887}
+  CurrentGameController: {fileID: 79258404}
 --- !u!4 &1098655175 stripped
 Transform:
   m_PrefabParentObject: {fileID: 481144, guid: 46318bd400f0eeb4cb3712290c6c810c, type: 2}
@@ -1009,11 +1009,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 23358668, guid: 46318bd400f0eeb4cb3712290c6c810c, type: 2}
       propertyPath: m_AngleLimits.m_LowerAngle
-      value: 90
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 23358668, guid: 46318bd400f0eeb4cb3712290c6c810c, type: 2}
       propertyPath: m_AngleLimits.m_UpperAngle
-      value: -180
+      value: -135
       objectReference: {fileID: 0}
     - target: {fileID: 23358668, guid: 46318bd400f0eeb4cb3712290c6c810c, type: 2}
       propertyPath: m_Motor.m_MotorSpeed
@@ -1029,7 +1029,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11444210, guid: 46318bd400f0eeb4cb3712290c6c810c, type: 2}
       propertyPath: SwingSpeed
-      value: 1500
+      value: -1500
       objectReference: {fileID: 0}
     - target: {fileID: 11444210, guid: 46318bd400f0eeb4cb3712290c6c810c, type: 2}
       propertyPath: SwingAngle
@@ -1188,6 +1188,14 @@ Prefab:
       propertyPath: CurrentGameController
       value: 
       objectReference: {fileID: 79258404}
+    - target: {fileID: 23358668, guid: 46318bd400f0eeb4cb3712290c6c810c, type: 2}
+      propertyPath: m_AngleLimits.m_UpperAngle
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 23358668, guid: 46318bd400f0eeb4cb3712290c6c810c, type: 2}
+      propertyPath: m_AngleLimits.m_LowerAngle
+      value: -90
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 46318bd400f0eeb4cb3712290c6c810c, type: 2}
   m_IsPrefabParent: 0
