@@ -19,6 +19,9 @@ public class Player : MonoBehaviour {
 	public int SwingDirection = 1;
 	public int BumpDirection = -1;
 	public int SwingAngle = 220;
+	public int BumpAngleRight = -45;
+	public int BumpAngleLeft = -135;
+	public int FacingDirection = 1;
 	
 	public float InitialJumpStrength = 100;
 	public float JumpStrength = 100;
@@ -58,32 +61,43 @@ public class Player : MonoBehaviour {
 		Physics2D.IgnoreCollision(Ball.GetComponent<Collider2D>(), GetComponent<Collider2D>());
 	}
 	
-	void SetArmSwing () {
+	void SetArmSwing (int dir) {
 		JointAngleLimits2D limits = armJoint.limits;
 		JointMotor2D motor = armJoint.motor;
 		
-		limits.max = SwingAngle * SwingDirection;
-		armJoint.limits = limits;
+		if (dir < 0) {
+			limits.max = SwingAngle;
+			limits.min = 360;
+		} else {
+			limits.max = SwingAngle;
+			limits.min = -180;	
+		}
 		
+		armJoint.limits = limits;	
 		armJoint.useMotor = true;
-		motor.motorSpeed = SwingSpeed * SwingDirection;
+		motor.motorSpeed = SwingSpeed;
 		armJoint.motor = motor;
 		
 		mIsSwinging = true;	
 		mIsBumping = false;
 	}
 	
-	void SetArmBump () {
+	void SetArmBump (int dir) {
 		JointAngleLimits2D limits = armJoint.limits;
 		JointMotor2D motor = armJoint.motor;
 		
-		limits.max = -45 * BumpDirection;
+		if (dir > 0) {
+			limits.max = BumpAngleRight;
+			limits.min = -180;	
+		} else {
+			limits.min = BumpAngleLeft;
+			limits.max = 0;
+		}
+		
 		armJoint.limits = limits;
-		
 		armJoint.useMotor = true;
-		motor.motorSpeed = SwingSpeed * BumpDirection;
+		motor.motorSpeed = SwingSpeed * dir;
 		armJoint.motor = motor;
-		
 		
 		mIsBumping = true;
 		mIsSwinging = false;
@@ -91,7 +105,8 @@ public class Player : MonoBehaviour {
 	
 	void SetArmRest() {
 		JointAngleLimits2D limits = armJoint.limits;
-		limits.max = 90 * SwingDirection;
+		limits.max = 0;
+		limits.min = -180;
 		armJoint.limits = limits;
 		armJoint.useMotor = false;
 		
@@ -155,9 +170,9 @@ public class Player : MonoBehaviour {
 		if ((mIsSwinging && !shouldSwing) || (mIsBumping && !shouldBump)){
 			SetArmRest();
 		} else if (!mIsSwinging && shouldSwing) {
-			SetArmSwing();
+			SetArmSwing(-FacingDirection);
 		} else if (!mIsBumping && shouldBump) {
-			SetArmBump();
+			SetArmBump(FacingDirection);
 		}
 	}
 

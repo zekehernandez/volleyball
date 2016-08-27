@@ -788,6 +788,14 @@ Prefab:
       propertyPath: CurrentGameController
       value: 
       objectReference: {fileID: 79258404}
+    - target: {fileID: 11444210, guid: 46318bd400f0eeb4cb3712290c6c810c, type: 2}
+      propertyPath: FacingDirection
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11444210, guid: 46318bd400f0eeb4cb3712290c6c810c, type: 2}
+      propertyPath: SwingAngle
+      value: 130
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 46318bd400f0eeb4cb3712290c6c810c, type: 2}
   m_IsPrefabParent: 0
@@ -833,9 +841,9 @@ Rigidbody2D:
   m_GameObject: {fileID: 1086649757}
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0.4
+  m_LinearDrag: 0.6
   m_AngularDrag: 0.05
-  m_GravityScale: 0.8
+  m_GravityScale: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -1033,7 +1041,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11444210, guid: 46318bd400f0eeb4cb3712290c6c810c, type: 2}
       propertyPath: SwingAngle
-      value: 200
+      value: 130
       objectReference: {fileID: 0}
     - target: {fileID: 11444210, guid: 46318bd400f0eeb4cb3712290c6c810c, type: 2}
       propertyPath: TeamNum
@@ -1047,6 +1055,10 @@ Prefab:
       propertyPath: CurrentGameController
       value: 
       objectReference: {fileID: 79258404}
+    - target: {fileID: 11444210, guid: 46318bd400f0eeb4cb3712290c6c810c, type: 2}
+      propertyPath: FacingDirection
+      value: -1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 46318bd400f0eeb4cb3712290c6c810c, type: 2}
   m_IsPrefabParent: 0
@@ -1178,7 +1190,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11444210, guid: 46318bd400f0eeb4cb3712290c6c810c, type: 2}
       propertyPath: SwingAngle
-      value: 200
+      value: 310
       objectReference: {fileID: 0}
     - target: {fileID: 11444210, guid: 46318bd400f0eeb4cb3712290c6c810c, type: 2}
       propertyPath: ServePosition
@@ -1361,6 +1373,18 @@ Prefab:
       propertyPath: CurrentGameController
       value: 
       objectReference: {fileID: 79258404}
+    - target: {fileID: 23358668, guid: 46318bd400f0eeb4cb3712290c6c810c, type: 2}
+      propertyPath: m_AngleLimits.m_LowerAngle
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 11444210, guid: 46318bd400f0eeb4cb3712290c6c810c, type: 2}
+      propertyPath: SwingAngle
+      value: 220
+      objectReference: {fileID: 0}
+    - target: {fileID: 23358668, guid: 46318bd400f0eeb4cb3712290c6c810c, type: 2}
+      propertyPath: m_AngleLimits.m_UpperAngle
+      value: 90
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 46318bd400f0eeb4cb3712290c6c810c, type: 2}
   m_IsPrefabParent: 0
